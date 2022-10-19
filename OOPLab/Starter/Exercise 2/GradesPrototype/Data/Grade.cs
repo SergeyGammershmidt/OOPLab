@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,7 +19,6 @@ namespace GradesPrototype.Data
 
         // TODO: Exercise 2: Task 2a: Add validation to the AssessmentDate property
         private string _assessmentDate;
-
         public string AssessmentDate
         {
             get
@@ -33,15 +33,15 @@ namespace GradesPrototype.Data
                 // Verify that the user has provided a valid date
                 if (DateTime.TryParse(value, out assessmentDate))
                 {
-                    // Check that the date is no later than the current date
+                    // Check that the date is no later than the current date.                    
                     if (assessmentDate > DateTime.Now)
                     {
                         // Throw an ArgumentOutOfRangeException if the date is after the current date
                         throw new ArgumentOutOfRangeException("AssessmentDate", "Assessment date must be on or before the current date");
                     }
 
-                    // If the date is valid, then save it in the appropriate format
-                    _assessmentDate = assessmentDate.ToString("d");
+                    // If the date is valid, then save it in the appropriate format.
+                    _assessmentDate = assessmentDate.ToString("d", CultureInfo.InvariantCulture);
                 }
                 else
                 {
